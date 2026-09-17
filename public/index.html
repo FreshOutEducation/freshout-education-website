@@ -879,26 +879,55 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
 .page { display: none; }
 .page.active { display: block; }
 
+
+/* ---------- Mobile fit & touch fixes (2026-09-17) ---------- */
+/* Fill-in blank sizes to the current word (not the longest) so the period stays attached */
+.fillin { overflow-x: clip; }
+.fillin .blank { display: inline; }
+.fillin .blank > span { position: absolute; left: 0; top: 0; }
+.fillin .blank > span.is-in { position: static; }
+body { overflow-x: clip; }
+html { scroll-padding-top: 92px; }
+[id], [data-anchor] { scroll-margin-top: 92px; }
+.footer .top > * { min-width: 0; }
+.footer .newsletter, .footer .tagline { max-width: 100%; }
+@media (max-width: 700px) {
+  .fillin .blank { max-width: 100%; }
+  .fillin .blank > span { white-space: normal; overflow-wrap: anywhere; }
+}
+@media (max-width: 380px) {
+  .brand { font-size: 1.02rem; gap: 7px; }
+  .brand .mark { width: 36px; }
+  .nav-cta .btn-sm { padding: 8px 11px; font-size: .8rem; }
+  .menu-btn { width: 38px; height: 38px; }
+  .header .container { gap: 8px; }
+}
+.stat cite, .statcard-note cite { font-size: max(.78rem, 12px); }
+@media (max-width: 960px), (pointer: coarse) {
+  .link-arrow { padding: 8px 0 6px; min-height: 44px; }
+  .footer ul a, .footer .bottom a, .footer .bottom span a { display: inline-block; padding: 8px 0; }
+  .crumbs a { display: inline-block; padding: 10px 6px; margin: -10px -6px; }
+}
 </style>
   
 </head>
 <body data-page="index" data-mode="preview">
-<a class="skip" href="#/index/main">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 <header class="header">
   <div class="container">
-    <a class="brand" href="#/index" aria-label="FreshOut Education, home">
+    <a class="brand" href="/" aria-label="FreshOut Education, home">
       <svg class="mark" viewBox="0 0 100 64.97" aria-hidden="true"><path d="M49.0 64.4C47.2 64.1 46.3 63.4 44.3 61.1C31.8 46.9 20.3 39.1 3.0 33.4C-0.1 32.3 -0.0 32.5 1.8 29.5C3.5 26.9 3.6 26.7 4.9 24.5C7.4 20.4 7.0 20.7 8.6 21.3C26.1 27.4 39.1 35.7 49.0 46.7L50.0 47.8L50.3 47.4C52.6 44.8 55.7 41.7 57.7 40.0C59.9 38.1 61.2 37.1 62.8 35.9C68.6 31.6 74.5 28.2 81.6 25.1C83.0 24.5 86.4 23.1 87.0 22.9C87.3 22.8 88.1 22.5 88.7 22.2C93.0 20.6 92.7 20.6 93.9 22.4C95.4 25.0 98.4 29.9 99.2 31.2C99.8 32.1 99.6 32.5 98.0 33.0C95.6 33.8 91.9 35.1 90.4 35.7C90.1 35.9 89.4 36.2 88.9 36.4C76.0 41.8 66.2 49.1 55.0 61.8C53.1 63.9 51.1 64.8 49.0 64.4ZM48.3 30.4C41.0 29.7 35.0 23.1 35.0 15.7C35.0 2.2 51.2 -4.5 60.7 5.1C70.6 15.0 62.4 31.7 48.3 30.4Z" fill="currentColor"/></svg>
       <span>FreshOut<small>Education</small></span>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="#/people" data-page="people">For people</a>
-      <a href="#/organizations" data-page="organizations">For organizations</a>
-      <a href="#/why" data-page="why">About FreshOut</a>
+      <a href="/people" data-page="people">For people</a>
+      <a href="/organizations" data-page="organizations">For organizations</a>
+      <a href="/about" data-page="why">About FreshOut</a>
       <a href="https://freshout360.com/" target="_blank" rel="noopener noreferrer">Our Software</a>
-      <a href="#/contact" data-page="contact">Contact</a>
+      <a href="/contact" data-page="contact">Contact</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-primary btn-sm" href="#/support/give">Donate</a>
+      <a class="btn btn-primary btn-sm" href="/support#give">Donate</a>
       <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span></span></button>
     </div>
   </div>
@@ -918,8 +947,8 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <p class="lead" data-reveal style="--d:.3s">Every next chapter runs on technology now: the job application, the bank account, the AI tools everyone suddenly expects you to know. We teach all of it, starting from whatever you already know, until you can do it without us.</p>
     </div>
     <div class="btn-group" data-reveal style="--d:.45s">
-      <a class="btn btn-yellow" href="#/people">I want to learn <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-ghost" href="#/organizations">I run an organization <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-yellow" href="/people">I want to learn <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-ghost" href="/organizations">I run an organization <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
@@ -930,7 +959,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <div class="breath-copy">
         <h2 class="big words serif-title" id="name-h">Tech literacy, open to everyone.</h2>
         <p class="lead" data-reveal style="--d:.1s">FreshOut Education is a Los Angeles nonprofit founded in 2019 to teach tech skills to people coming home from incarceration. We've since opened our doors wider: to anyone starting over, whether you're aging out of foster care, leaving a relationship, exiting a career, finishing school without a plan, or just ready for a change. We offer free training in tech, financial literacy, and job readiness, because everyone deserves a real shot at a fresh start.</p>
-        <a class="btn btn-orange" href="#/why/name" data-reveal style="--d:.2s">Read the whole story <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-orange" href="/about#name" data-reveal style="--d:.2s">Read the whole story <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="frame breath-media" data-reveal style="--d:.14s">
         <img src="FOE%20Site%20Images/web/teaching-laptop-1200.jpg" alt="An instructor pointing something out on a laptop screen to a small group of students" loading="lazy">
@@ -975,7 +1004,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
             </button>
             <div class="track-body" id="track-body-money">
               <p class="track-desc">An in-depth training on budgeting, debt, saving, credit, money mindset, and more, built to help you move from &ldquo;I don&rsquo;t know where to start&rdquo; to &ldquo;I have a real plan,&rdquo; without judgement or complicated jargon.</p><h5>You walk out able to:</h5><ul class="tick"><li>Open and run a real bank account from your phone</li><li>Build credit from zero and use a credit card without it using you</li><li>Pull your credit report and free score and fix what&rsquo;s wrong on it</li><li>Create a budget that actually works for your life</li><li>Recognize the scams aimed at you specifically</li></ul>
-              <p class="track-meta"><span class="pill">Financial Literacy</span> <a class="link-arrow" href="#/people/money">See the curriculum <span aria-hidden="true">&rarr;</span></a></p>
+              <p class="track-meta"><span class="pill">Financial Literacy</span> <a class="link-arrow" href="/people#money">See the curriculum <span aria-hidden="true">&rarr;</span></a></p>
             </div>
           </div>
           <div class="track prog-tech" data-i="1">
@@ -984,7 +1013,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
             </button>
             <div class="track-body" id="track-body-tech">
               <p class="track-desc">An in-depth training on your phone, your accounts, and the forms and portals that run your life, taught step by step so you go from avoiding your own settings menu to running it yourself.</p><h5>You walk out able to:</h5><ul class="tick"><li>Navigate your phone, set up email, and manage your accounts and passwords</li><li>Get back into a locked account on your own</li><li>Get through a benefits, housing, or health portal on your own</li><li>Fill out, sign, save, and send a document</li><li>Join and run a Zoom or Google Meet call, camera, mic, screen share, and all</li></ul>
-              <p class="track-meta"><span class="pill">Technology</span> <a class="link-arrow" href="#/people/tech">See the curriculum <span aria-hidden="true">&rarr;</span></a></p>
+              <p class="track-meta"><span class="pill">Technology</span> <a class="link-arrow" href="/people#tech">See the curriculum <span aria-hidden="true">&rarr;</span></a></p>
             </div>
           </div>
           <div class="track prog-ai" data-i="2">
@@ -993,7 +1022,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
             </button>
             <div class="track-body" id="track-body-ai">
               <p class="track-desc">An in-depth training on using AI to make your life easier, explaining a letter, drafting an email, planning your week, for anyone who&rsquo;s heard about AI and hasn&rsquo;t been shown what it can actually do for them.</p><h5>You walk out able to:</h5><ul class="tick"><li>Set up an AI assistant and write a prompt that actually works</li><li>Use AI to explain a letter, bill, lease, or job posting in plain terms</li><li>Draft a r&eacute;sum&eacute;, an email to a landlord, or a message to a caseworker with AI</li><li>Catch when AI gets something wrong and know when to double check it</li><li>Protect your information: what never to paste into an AI tool</li></ul>
-              <p class="track-meta"><span class="pill">AI Introduction</span> <a class="link-arrow" href="#/people/ai">See the curriculum <span aria-hidden="true">&rarr;</span></a></p>
+              <p class="track-meta"><span class="pill">AI Introduction</span> <a class="link-arrow" href="/people#ai">See the curriculum <span aria-hidden="true">&rarr;</span></a></p>
             </div>
           </div>
           <div class="track prog-work" data-i="3">
@@ -1002,7 +1031,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
             </button>
             <div class="track-body" id="track-body-work">
               <p class="track-desc">An in-depth training on your story, your rights, and getting past what stands between you and a yes, for anyone whose r&eacute;sum&eacute; doesn&rsquo;t fit the template, whatever the reason, a gap, a record, an unfinished degree, or a life that didn&rsquo;t go in a straight line.</p><h5>You walk out able to:</h5><ul class="tick"><li>Know what an employer can legally ask you, and what they owe you in return</li><li>Search and apply for jobs strategically, build a network, and line up references that actually help</li><li>Build a r&eacute;sum&eacute; that gets past automated screening</li><li>Interview with a clear, structured story and record a video interview you&rsquo;re willing to send</li><li>Fill out the paperwork a job hands you: W-2s, 1099s, tax withholding, health insurance enrollment</li></ul>
-              <p class="track-meta"><span class="pill">Career Readiness</span> <a class="link-arrow" href="#/people/work">See the curriculum <span aria-hidden="true">&rarr;</span></a></p>
+              <p class="track-meta"><span class="pill">Career Readiness</span> <a class="link-arrow" href="/people#work">See the curriculum <span aria-hidden="true">&rarr;</span></a></p>
             </div>
           </div>
         </div>
@@ -1090,14 +1119,14 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <p class="lead" data-reveal>One door for people who are starting over. One for the community-based nonprofits who work with them every day.</p>
     </div>
     <div class="doors stagger">
-      <a class="door" href="#/people">
+      <a class="door" href="/people">
         <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1400&q=80" alt="Adult students in a conference room following a Money Basics lesson on a shared screen" loading="lazy">
         <span class="tag">For people</span>
         <h3>You don't need experience. You need a seat.</h3>
         <p>Money, tech, AI, and getting hired, taught in a room by people who understand what you are dealing with.</p>
         <span class="link-arrow">Find a program <span aria-hidden="true">&rarr;</span></span>
       </a>
-      <a class="door" href="#/organizations">
+      <a class="door" href="/organizations">
         <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1400&q=80" alt="A group of nonprofit staff smiling and talking together around a table" loading="lazy">
         <span class="tag">For organizations</span>
         <h3>Bring FreshOut to your building.</h3>
@@ -1133,9 +1162,9 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <p class="lead mt-2" data-reveal>Fund a seat, host a program at your site, or refer someone who is starting over.</p>
     </div>
     <div class="btn-group" data-reveal="right">
-      <a class="btn btn-primary" href="#/support/give">Donate</a>
-      <a class="btn btn-yellow" href="#/organizations">Partner with us</a>
-      <a class="btn btn-light" href="#/contact">Refer someone</a>
+      <a class="btn btn-primary" href="/support#give">Donate</a>
+      <a class="btn btn-yellow" href="/organizations">Partner with us</a>
+      <a class="btn btn-light" href="/contact">Refer someone</a>
     </div>
   </div>
 </section>
@@ -1145,12 +1174,12 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
 <section class="page-hero" aria-label="For people">
   <div class="media" aria-hidden="true"><video muted loop playsinline autoplay preload="none" poster="https://images.unsplash.com/photo-1758270704080-e3556e6794a7?auto=format&fit=crop&w=1800&q=80" data-src="https://videos.pexels.com/video-files/8419341/8419341-hd_1920_1080_30fps.mp4"></video></div>
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/index">Home</a><span>/</span><span>For people</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>For people</span></nav>
     <h1 class="words">You don't need experience. You need a seat.</h1>
     <p class="lead" data-reveal style="--d:.3s">Four programs that teach what nobody taught you: how money works, how your phone works, how AI can work for you, and how to get hired. In person or virtually, in Los Angeles, in plain English.</p>
     <div class="btn-group mt-3" data-reveal style="--d:.45s">
-      <a class="btn btn-primary" href="#/people/programs-list">See the programs</a>
-      <a class="btn btn-ghost" href="#/people/join">How to join</a>
+      <a class="btn btn-primary" href="/people#programs-list">See the programs</a>
+      <a class="btn btn-ghost" href="/people#join">How to join</a>
     </div>
   </div>
 </section>
@@ -1377,14 +1406,14 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
   <div class="container split" style="align-items: start;">
     <div>
       <h2 id="faq-h" class="words" style="font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.01em;">Things people ask before they show up.</h2>
-      <p class="lead mt-2" data-reveal>If your question is not here, <a href="#/contact">ask us</a> and a person will reply.</p>
+      <p class="lead mt-2" data-reveal>If your question is not here, <a href="/contact">ask us</a> and a person will reply.</p>
     </div>
     <div class="acc" data-reveal>
       <details open><summary>Do I need any experience? <span class="plus"></span></summary><div class="acc-body"><p>No. Every course starts at the beginning, including how to use the phone you were just handed. Bring your questions. Bring your phone.</p></div></details>
       <details><summary>Who is this for? <span class="plus"></span></summary><div class="acc-body"><p>Anyone who was never taught the basics of money, technology, or getting hired. Our roots are in reentry work in Los Angeles, and the door is open to anyone starting over: people coming home, young people leaving foster care, people leaving a relationship or a marriage, people who lost a job after twenty years, seniors, and youth.</p></div></details>
-      <details><summary>Where are sessions, and what do they cost? <span class="plus"></span></summary><div class="acc-body"><p>Sessions run virtually on Zoom and in person in Los Angeles, at partner organizations' sites and directly through FreshOut. Schedules, locations, and cost details for 2026 are still being set. <a href="#/contact">Contact us</a> and we will tell you exactly what is involved.</p></div></details>
+      <details><summary>Where are sessions, and what do they cost? <span class="plus"></span></summary><div class="acc-body"><p>Sessions run virtually on Zoom and in person in Los Angeles, at partner organizations' sites and directly through FreshOut. Schedules, locations, and cost details for 2026 are still being set. <a href="/contact">Contact us</a> and we will tell you exactly what is involved.</p></div></details>
       <details><summary>Do I have to talk about my past? <span class="plus"></span></summary><div class="acc-body"><p>Only if you want to. It comes up in the Getting Hired course, where learning to talk about your history briefly and honestly is the skill that gets you the job. How you got here is a fact about your circumstances, not your character. Nobody here will ask you to explain yourself.</p></div></details>
-      <details><summary>Can my organization host a program or get staff training? <span class="plus"></span></summary><div class="acc-body"><p>Yes. That is half of what we do. See <a href="#/organizations">For organizations</a>, or email <a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a>.</p></div></details>
+      <details><summary>Can my organization host a program or get staff training? <span class="plus"></span></summary><div class="acc-body"><p>Yes. That is half of what we do. See <a href="/organizations">For organizations</a>, or email <a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a>.</p></div></details>
       <details><summary>Is FreshOut a registered nonprofit? <span class="plus"></span></summary><div class="acc-body"><p>Yes. FreshOut Education is a 501(c)(3) public charity based in Los Angeles, EIN 87-4636609, with programs since 2019. Donations are tax-deductible to the extent allowed by law.</p></div></details>
     </div>
   </div>
@@ -1400,13 +1429,13 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
         <span class="pill">Directly</span>
         <h3 class="mt-1">Contact FreshOut</h3>
         <p>Tell us a little about what you are fresh out of and what you want to learn. Someone from our team will get back to you.</p>
-        <div class="btn-group mt-2"><a class="btn btn-primary" href="#/contact">Get in touch</a><a class="btn btn-ghost" href="mailto:info@freshouteducation.org">Email us</a></div>
+        <div class="btn-group mt-2"><a class="btn btn-primary" href="/contact">Get in touch</a><a class="btn btn-ghost" href="mailto:info@freshouteducation.org">Email us</a></div>
       </div></div>
       <div class="card"><div class="body">
         <span class="pill">Through a partner</span>
         <h3 class="mt-1">Ask your case manager</h3>
-        <p>Many of our programs run at partner organizations: reentry programs, housing providers, and workforce centers. If you are working with one, ask them about FreshOut. If they have not heard of us, send them <a href="#/organizations" style="color: var(--orange-deep)">here</a>.</p>
-        <div class="btn-group mt-2"><a class="btn btn-ghost" href="#/organizations/refer">For case managers</a></div>
+        <p>Many of our programs run at partner organizations: reentry programs, housing providers, and workforce centers. If you are working with one, ask them about FreshOut. If they have not heard of us, send them <a href="/organizations" style="color: var(--orange-deep)">here</a>.</p>
+        <div class="btn-group mt-2"><a class="btn btn-ghost" href="/organizations#refer">For case managers</a></div>
       </div></div>
     </div>
   </div>
@@ -1417,12 +1446,12 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
 <section class="page-hero" aria-label="For organizations">
   <div class="media" aria-hidden="true"><video muted loop playsinline autoplay preload="none" poster="https://images.unsplash.com/photo-1755718669546-bdb2f907be1c?auto=format&fit=crop&w=1800&q=80" data-src="https://videos.pexels.com/video-files/5940051/5940051-uhd_2560_1440_25fps.mp4"></video></div>
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/index">Home</a><span>/</span><span>For organizations</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>For organizations</span></nav>
     <h1 class="words">Bring FreshOut to your building.</h1>
     <p class="lead" data-reveal style="--d:.3s">You know your people, and they trust you in a way no national brand ever will. We bring the money, tech, and AI teaching, for your clients and for your staff. No jargon and no sales pitch.</p>
     <div class="btn-group mt-3" data-reveal style="--d:.45s">
-      <a class="btn btn-primary" href="#/contact">Talk to us</a>
-      <a class="btn btn-ghost" href="#/organizations/train">See the workshop menu</a>
+      <a class="btn btn-primary" href="/contact">Talk to us</a>
+      <a class="btn btn-ghost" href="/organizations#train">See the workshop menu</a>
     </div>
   </div>
 </section>
@@ -1478,7 +1507,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
           <li>Phone-first, designed for the devices your clients actually have</li>
           <li>We tell you plainly what we need from you and how it is funded</li>
         </ul>
-        <a class="btn btn-primary mt-2" href="#/contact" data-reveal>Ask about hosting</a>
+        <a class="btn btn-primary mt-2" href="/contact" data-reveal>Ask about hosting</a>
       </div>
     </div>
 
@@ -1502,7 +1531,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <details><summary>Measuring What You Do <span class="plus"></span></summary><div class="acc-body"><p>Simple outcome tracking, so you can show funders what happened without a data team.</p></div></details>
       <details><summary>Building With AI for Nonprofit Staff <span class="plus"></span></summary><div class="acc-body"><p>No code required. Small tools and automations built around your own workflows.</p></div></details>
     </div>
-    <div class="btn-group mt-3" data-reveal><a class="btn btn-yellow" href="#/contact">Book a workshop conversation</a></div>
+    <div class="btn-group mt-3" data-reveal><a class="btn btn-yellow" href="/contact">Book a workshop conversation</a></div>
 
     <div class="split mt-4" id="certify" data-anchor="certify">
       <div class="frame wide parallax" data-reveal="left"><img src="FOE%20Site%20Images/web/certify-staff-1400.jpg" alt="Woman smiling and shaking hands with a colleague in an office" loading="lazy"></div>
@@ -1514,7 +1543,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
           <div class="course"><b>Job Coaching</b><span>Deliver Getting Hired, Phases 1 to 3, including the Fair Chance rules.</span></div>
           <div class="course"><b>Digital Skills Train-the-Trainer</b><span>Deliver Tech Basics and AI 101.</span></div>
         </div>
-        <a class="btn btn-ghost mt-2" href="#/contact" data-reveal>Ask about certification</a>
+        <a class="btn btn-ghost mt-2" href="/contact" data-reveal>Ask about certification</a>
       </div>
     </div>
   </div>
@@ -1532,7 +1561,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <p class="mt-3 muted" data-reveal>Prefer email? <a href="mailto:info@freshouteducation.org" style="color: var(--orange)">info@freshouteducation.org</a></p>
     </div>
     <div data-reveal="right">
-      <form class="form card" style="padding: 28px; color: var(--ink);" data-form name="referral" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <form class="form card" style="padding: 28px; color: var(--ink);" data-form name="referral" method="POST">
         <input type="hidden" name="form-name" value="referral">
         <p class="honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
         <div class="two">
@@ -1556,7 +1585,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
         <div class="field"><label for="r-notes">Anything else?</label><textarea id="r-notes" name="notes" placeholder="Best time to reach you, how many people, timing"></textarea></div>
         <button class="btn btn-primary" type="submit">Send referral request</button>
       </form>
-      <div class="form-success"><h3>Got it, thank you.</h3><p class="mb-0">Someone from FreshOut will call or email you to take it from here.</p></div>
+      <div class="form-success"><h3>Almost there.</h3><p class="mb-0">Your email app should now be open with your referral request addressed to <a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a>. Press send and someone from FreshOut will call or email you to take it from here. If nothing opened, email us directly at that address.</p></div>
     </div>
   </div>
 </section>
@@ -1582,7 +1611,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <p class="lead mt-2" data-reveal>One conversation is enough to find out whether we are the right fit for your clients or your team.</p>
     </div>
     <div class="btn-group" data-reveal="right">
-      <a class="btn btn-primary" href="#/contact">Bring FreshOut to your organization</a>
+      <a class="btn btn-primary" href="/contact">Bring FreshOut to your organization</a>
       <a class="btn btn-ghost" href="mailto:info@freshouteducation.org">Email us</a>
     </div>
   </div>
@@ -1593,7 +1622,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
 <section class="page-hero" aria-label="Why FreshOut">
   <div class="media" aria-hidden="true"><video muted loop playsinline autoplay preload="none" poster="https://images.unsplash.com/photo-1699431392081-9706ef082311?auto=format&fit=crop&w=1800&q=80" data-src="https://videos.pexels.com/video-files/35887000/15220776_1920_1080_30fps.mp4" data-rate="0.5"></video></div>
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/index">Home</a><span>/</span><span>Why FreshOut</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>Why FreshOut</span></nav>
     <h1 class="words">We started in reentry. We stayed for everyone starting over.</h1>
       </div>
 </section>
@@ -1684,8 +1713,8 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <h2 id="cta-h" class="words" style="font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.01em;">Come to a session, or help us fill the room.</h2>
     </div>
     <div class="btn-group" data-reveal="right">
-      <a class="btn btn-primary" href="#/support">Support our work</a>
-      <a class="btn btn-ghost" href="#/people">See the programs</a>
+      <a class="btn btn-primary" href="/support">Support our work</a>
+      <a class="btn btn-ghost" href="/people">See the programs</a>
     </div>
   </div>
 </section>
@@ -1695,12 +1724,12 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
 <section class="page-hero" aria-label="Support">
   <div class="media" aria-hidden="true"><img src="https://images.unsplash.com/photo-1674500139057-f32244e3fc60?auto=format&fit=crop&w=1800&q=80" alt=""></div>
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/index">Home</a><span>/</span><span>Support</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>Support</span></nav>
     <h1 class="words">Fund the room where a fresh start becomes a real one.</h1>
     <p class="lead" data-reveal style="--d:.3s">Somebody has to be in the room in Los Angeles where a person opens their first bank account, sends their first email, or asks an AI a question and gets a useful answer back. Help us keep the lights on and the seats full.</p>
     <div class="btn-group mt-3" data-reveal style="--d:.45s">
-      <a class="btn btn-primary" href="#/support/give">Give now</a>
-      <a class="btn btn-ghost" href="#/contact">For foundations and corporate funders</a>
+      <a class="btn btn-primary" href="/support#give">Give now</a>
+      <a class="btn btn-ghost" href="/contact">For foundations and corporate funders</a>
     </div>
   </div>
 </section>
@@ -1742,10 +1771,10 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <h2 id="ways-h" class="words">Money helps, and so does a room or a referral.</h2>
     </div>
     <div class="grid grid-4 stagger">
-      <div class="card"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3 class="serif-title">Give</h3><p>One time or monthly. Gifts pay for instructors, materials, and the rooms where classes happen.</p></div><div class="foot"><a class="link-arrow" href="#/support/give">Donate &rarr;</a></div></div>
-      <div class="card"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3 class="serif-title">Fund a cohort or a site</h3><p>Sponsor a full 8 to 12 week pathway, or bring FreshOut to a specific partner organization's clients.</p></div><div class="foot"><a class="link-arrow" href="#/contact">Talk to us &rarr;</a></div></div>
-      <div class="card"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1698047682091-782b1e5c6536?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3 class="serif-title">Partner</h3><p>Host our programs, or bring us in to train your staff. Both make the local network stronger.</p></div><div class="foot"><a class="link-arrow" href="#/organizations">For organizations &rarr;</a></div></div>
-      <div class="card"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1760992003927-96ac55e57296?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3 class="serif-title">Refer someone</h3><p>Know someone who is fresh out of something and could use a seat? Send them our way.</p></div><div class="foot"><a class="link-arrow" href="#/organizations/refer">Refer &rarr;</a></div></div>
+      <div class="card"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3 class="serif-title">Give</h3><p>One time or monthly. Gifts pay for instructors, materials, and the rooms where classes happen.</p></div><div class="foot"><a class="link-arrow" href="/support#give">Donate &rarr;</a></div></div>
+      <div class="card"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3 class="serif-title">Fund a cohort or a site</h3><p>Sponsor a full 8 to 12 week pathway, or bring FreshOut to a specific partner organization's clients.</p></div><div class="foot"><a class="link-arrow" href="/contact">Talk to us &rarr;</a></div></div>
+      <div class="card"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1698047682091-782b1e5c6536?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3 class="serif-title">Partner</h3><p>Host our programs, or bring us in to train your staff. Both make the local network stronger.</p></div><div class="foot"><a class="link-arrow" href="/organizations">For organizations &rarr;</a></div></div>
+      <div class="card"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1760992003927-96ac55e57296?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3 class="serif-title">Refer someone</h3><p>Know someone who is fresh out of something and could use a seat? Send them our way.</p></div><div class="foot"><a class="link-arrow" href="/organizations#refer">Refer &rarr;</a></div></div>
     </div>
   </div>
 </section>
@@ -1759,7 +1788,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <details open><summary>Is my gift tax-deductible? <span class="plus"></span></summary><div class="acc-body"><p>Yes. FreshOut Education is a 501(c)(3) public charity, EIN 87-4636609. Gifts are deductible to the extent allowed by law, and you will receive a receipt.</p></div></details>
       <details><summary>Can I give by check, DAF, stock, or employer match? <span class="plus"></span></summary><div class="acc-body"><p>Yes to all of them. Email <a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a> and we will send you what you need.</p></div></details>
       <details><summary>Where can I see your financials? <span class="plus"></span></summary><div class="acc-body"><p>Our annual Form 990 will be linked on this site once posted. In the meantime, ask us and we will share what we have.</p></div></details>
-      <details><summary>Can I fund something specific? <span class="plus"></span></summary><div class="acc-body"><p>Yes. A cohort, a partner site, devices, or staff. <a href="#/contact">Tell us what matters to you</a> and we will match it to a real need.</p></div></details>
+      <details><summary>Can I fund something specific? <span class="plus"></span></summary><div class="acc-body"><p>Yes. A cohort, a partner site, devices, or staff. <a href="/contact">Tell us what matters to you</a> and we will match it to a real need.</p></div></details>
     </div>
   </div>
 </section>
@@ -1769,7 +1798,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
 <section class="page-hero" aria-label="Contact">
   <div class="media" aria-hidden="true"><img src="https://images.unsplash.com/photo-1722410141941-5b483806917e?auto=format&fit=crop&w=1800&q=80" alt=""></div>
   <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/index">Home</a><span>/</span><span>Contact</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>Contact</span></nav>
     <h1 class="words">Say hello. A person will reply.</h1>
     <p class="lead" data-reveal style="--d:.3s">Whether you want a seat, want to bring us to your organization, want to refer someone, or want to fund the work, start here.</p>
   </div>
@@ -1779,7 +1808,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
   <div class="container" style="max-width: 760px;">
     <div>
       <h2 id="form-h" class="words" style="font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.01em;">Tell us what you're fresh out of, or what you're looking for.</h2>
-      <form class="form mt-3" data-form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-reveal>
+      <form class="form mt-3" data-form name="contact" method="POST" data-reveal>
         <input type="hidden" name="form-name" value="contact">
         <p class="honeypot"><label>Don't fill this out: <input name="bot-field"></label></p>
         <fieldset class="field" style="border:0; padding:0; margin:0;">
@@ -1816,7 +1845,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
         <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" required placeholder="A sentence or two is plenty."></textarea><span class="hint">Please do not include anyone else's personal details here.</span></div>
         <div><button class="btn btn-primary" type="submit">Send message <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
       </form>
-      <div class="form-success"><h3>Thanks, we got it.</h3><p class="mb-0">Someone from FreshOut will get back to you soon. If it is urgent, email <a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a>.</p></div>
+      <div class="form-success"><h3>Almost there.</h3><p class="mb-0">Your email app should now be open with your message addressed to <a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a>. Press send and someone from FreshOut will get back to you soon. If nothing opened, email us directly at that address.</p></div>
     </div>
   </div>
 </section>
@@ -1827,10 +1856,10 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       <h2 id="quick-h" class="words">Or go straight to what you need.</h2>
     </div>
     <div class="grid grid-4 stagger">
-      <a class="card" href="#/people"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3>Programs</h3><p>Money, tech, AI, and getting hired.</p></div><div class="foot"><span class="link-arrow">For people &rarr;</span></div></a>
-      <a class="card" href="#/organizations"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1755718669546-bdb2f907be1c?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3>Organizations</h3><p>Host, train, certify, refer.</p></div><div class="foot"><span class="link-arrow">For organizations &rarr;</span></div></a>
-      <a class="card" href="#/why"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1722410141941-5b483806917e?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3>Our story</h3><p>The name, the roots, the promise.</p></div><div class="foot"><span class="link-arrow">Why FreshOut &rarr;</span></div></a>
-      <a class="card" href="#/support"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3>Support</h3><p>Give, fund a cohort, partner.</p></div><div class="foot"><span class="link-arrow">Support &rarr;</span></div></a>
+      <a class="card" href="/people"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3>Programs</h3><p>Money, tech, AI, and getting hired.</p></div><div class="foot"><span class="link-arrow">For people &rarr;</span></div></a>
+      <a class="card" href="/organizations"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1755718669546-bdb2f907be1c?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3>Organizations</h3><p>Host, train, certify, refer.</p></div><div class="foot"><span class="link-arrow">For organizations &rarr;</span></div></a>
+      <a class="card" href="/about"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1722410141941-5b483806917e?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3>Our story</h3><p>The name, the roots, the promise.</p></div><div class="foot"><span class="link-arrow">Why FreshOut &rarr;</span></div></a>
+      <a class="card" href="/support"><div class="body"><div class="icon-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=200&q=80" alt="" loading="lazy"></div><h3>Support</h3><p>Give, fund a cohort, partner.</p></div><div class="foot"><span class="link-arrow">Support &rarr;</span></div></a>
     </div>
   </div>
 </section>
@@ -1842,54 +1871,54 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
   <div class="container">
     <div class="top">
       <div>
-        <a class="brand" href="#/index" aria-label="FreshOut Education, home">
+        <a class="brand" href="/" aria-label="FreshOut Education, home">
           <svg class="mark" viewBox="0 0 100 64.97" aria-hidden="true"><path d="M49.0 64.4C47.2 64.1 46.3 63.4 44.3 61.1C31.8 46.9 20.3 39.1 3.0 33.4C-0.1 32.3 -0.0 32.5 1.8 29.5C3.5 26.9 3.6 26.7 4.9 24.5C7.4 20.4 7.0 20.7 8.6 21.3C26.1 27.4 39.1 35.7 49.0 46.7L50.0 47.8L50.3 47.4C52.6 44.8 55.7 41.7 57.7 40.0C59.9 38.1 61.2 37.1 62.8 35.9C68.6 31.6 74.5 28.2 81.6 25.1C83.0 24.5 86.4 23.1 87.0 22.9C87.3 22.8 88.1 22.5 88.7 22.2C93.0 20.6 92.7 20.6 93.9 22.4C95.4 25.0 98.4 29.9 99.2 31.2C99.8 32.1 99.6 32.5 98.0 33.0C95.6 33.8 91.9 35.1 90.4 35.7C90.1 35.9 89.4 36.2 88.9 36.4C76.0 41.8 66.2 49.1 55.0 61.8C53.1 63.9 51.1 64.8 49.0 64.4ZM48.3 30.4C41.0 29.7 35.0 23.1 35.0 15.7C35.0 2.2 51.2 -4.5 60.7 5.1C70.6 15.0 62.4 31.7 48.3 30.4Z" fill="currentColor"/></svg>
           <span>FreshOut<small>Education</small></span>
         </a>
         <p class="tagline">Money, technology, AI, and work, taught virtually and in person in Los Angeles to anyone starting over, and to the nonprofits that serve them.</p>
-        <form class="newsletter" data-form name="newsletter" method="POST" data-netlify="true" aria-label="Newsletter">
+        <form class="newsletter" data-form name="newsletter" method="POST" aria-label="Newsletter">
           <input type="hidden" name="form-name" value="newsletter">
           <label class="sr-only" for="nl-email">Email address</label>
           <input id="nl-email" type="email" name="email" placeholder="Get occasional updates" required>
           <button type="submit">Join</button>
         </form>
-        <div class="form-success"><p class="mb-0">Thanks, you're on the list.</p></div>
+        <div class="form-success"><p class="mb-0">Your email app should now be open. Press send and you're on the list. If nothing opened, email <a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a>.</p></div>
       </div>
       <div>
         <h4>Learn</h4>
         <ul>
-          <li><a href="#/people/money">Money Basics</a></li>
-          <li><a href="#/people/tech">Tech Basics</a></li>
-          <li><a href="#/people/ai">AI for Everyday Life</a></li>
-          <li><a href="#/people/work">Getting Hired</a></li>
-          <li><a href="#/people/join">How to join</a></li>
-          <li><a href="#/people/faq">Common questions</a></li>
+          <li><a href="/people#money">Money Basics</a></li>
+          <li><a href="/people#tech">Tech Basics</a></li>
+          <li><a href="/people#ai">AI for Everyday Life</a></li>
+          <li><a href="/people#work">Getting Hired</a></li>
+          <li><a href="/people#join">How to join</a></li>
+          <li><a href="/people#faq">Common questions</a></li>
         </ul>
       </div>
       <div>
         <h4>Organizations</h4>
         <ul>
-          <li><a href="#/organizations/host">Host a program</a></li>
-          <li><a href="#/organizations/train">Train your team</a></li>
-          <li><a href="#/organizations/certify">Certify frontline staff</a></li>
-          <li><a href="#/organizations/refer">Refer someone</a></li>
+          <li><a href="/organizations#host">Host a program</a></li>
+          <li><a href="/organizations#train">Train your team</a></li>
+          <li><a href="/organizations#certify">Certify frontline staff</a></li>
+          <li><a href="/organizations#refer">Refer someone</a></li>
         </ul>
       </div>
       <div>
         <h4>About</h4>
         <ul>
-          <li><a href="#/why">Why FreshOut</a></li>
-          <li><a href="#/why/name">The name</a></li>
-          <li><a href="#/why/team">Team and board</a></li>
-          <li><a href="#/support">Support our work</a></li>
-          <li><a href="#/contact">Contact</a></li>
+          <li><a href="/about">Why FreshOut</a></li>
+          <li><a href="/about#name">The name</a></li>
+          <li><a href="/about#team">Team and board</a></li>
+          <li><a href="/support">Support our work</a></li>
+          <li><a href="/contact">Contact</a></li>
           <li><a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a></li>
         </ul>
       </div>
     </div>
     <div class="bottom">
       <div>© <span data-year>2026</span> FreshOut Education. Los Angeles, CA. A 501(c)(3) public charity, EIN 87-4636609.</div>
-      <div>Our annual Form 990 will be linked here once posted. <a href="#/index" aria-disabled="true">Privacy</a> · <a href="#/index" aria-disabled="true">Accessibility</a></div>
+      <div>Our annual Form 990 will be linked here once posted.</div>
     </div>
   </div>
 </footer>
@@ -2132,25 +2161,25 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
     if (root.dataset.init) return; root.dataset.init = '1';
     const tabs = [...root.querySelectorAll('[role="tab"]')];
     const panels = [...root.querySelectorAll('[role="tabpanel"]')];
-    const activate = (tab, focus) => {
+    const activate = (tab, focus, updateUrl) => {
       tabs.forEach((t) => { t.setAttribute('aria-selected', String(t === tab)); t.tabIndex = t === tab ? 0 : -1; });
       panels.forEach((p) => p.classList.toggle('active', p.id === tab.getAttribute('aria-controls')));
       if (focus) tab.focus();
-      if (tab.dataset.hash) history.replaceState(null, '', location.pathname + location.search + (PREVIEW ? location.hash.split('?')[0] : '') + (PREVIEW ? '' : '#' + tab.dataset.hash));
+      if (updateUrl && tab.dataset.hash) history.replaceState(null, '', location.pathname + location.search + '#' + tab.dataset.hash);
     };
     tabs.forEach((tab) => {
-      tab.addEventListener('click', () => activate(tab));
+      tab.addEventListener('click', () => activate(tab, false, true));
       tab.addEventListener('keydown', (e) => {
         const idx = tabs.indexOf(tab);
-        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); activate(tabs[(idx + 1) % tabs.length], true); }
-        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); activate(tabs[(idx - 1 + tabs.length) % tabs.length], true); }
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); activate(tabs[(idx + 1) % tabs.length], true, true); }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); activate(tabs[(idx - 1 + tabs.length) % tabs.length], true, true); }
       });
     });
     // deep link by tab id
-    const want = (PREVIEW ? (location.hash.split('/')[2] || '') : location.hash.slice(1));
+    const want = location.hash.replace(/^#\/?/, '').split('/').pop();
     const match = tabs.find((t) => t.dataset.hash === want);
     activate(match || tabs.find((t) => t.getAttribute('aria-selected') === 'true') || tabs[0]);
-    root.activateTab = (hash) => { const t = tabs.find((x) => x.dataset.hash === hash); if (t) activate(t); };
+    root.activateTab = (hash) => { const t = tabs.find((x) => x.dataset.hash === hash); if (t) activate(t, false, false); };
   }
 
   /* ---------- Pathway steps ---------- */
@@ -2222,17 +2251,40 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
     render();
   }
 
-  /* ---------- Forms ---------- */
+  /* ---------- Forms: compose an email to info@ with the answers (no form backend on Firebase Hosting) ---------- */
+  const FORM_TO = 'info@freshouteducation.org';
+  function formToMail(form) {
+    const name = form.getAttribute('name') || 'form';
+    const subject = { referral: 'Referral request from the website', contact: 'Message from the website', newsletter: 'Newsletter signup' }[name] || ('Website ' + name);
+    const lines = [];
+    [...form.elements].forEach((el) => {
+      if (!el.name || el.name === 'bot-field' || el.type === 'submit' || el.type === 'button' || el.type === 'hidden' || el.disabled) return;
+      if ((el.type === 'radio' || el.type === 'checkbox') && !el.checked) return;
+      let label = el.name;
+      const lab = form.querySelector('label[for="' + el.id + '"]') || (el.closest('label'));
+      if (lab) label = lab.textContent.replace(/\s+/g, ' ').trim().replace(/[:*]\s*$/, '');
+      let value = el.value;
+      if (el.tagName === 'SELECT') value = el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : el.value;
+      if (el.type === 'radio' || el.type === 'checkbox') { const l2 = el.closest('label'); value = l2 ? l2.textContent.replace(/\s+/g, ' ').trim() : el.value; label = el.name; }
+      if (String(value).trim() === '') return;
+      lines.push(label + ': ' + value);
+    });
+    lines.push('', 'Sent from freshouteducation.org');
+    return 'mailto:' + FORM_TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
   function initForm(form) {
     if (form.dataset.init) return; form.dataset.init = '1';
+    form.setAttribute('action', 'mailto:' + FORM_TO);
+    form.setAttribute('method', 'GET');
     form.addEventListener('submit', (e) => {
-      if (!form.checkValidity()) { form.reportValidity(); e.preventDefault(); return; }
-      const hosted = /netlify|freshouteducation/.test(location.hostname);
-      if (hosted && !PREVIEW) return; // let Netlify Forms handle it
       e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
       const ok = form.parentElement.querySelector('.form-success');
+      const href = formToMail(form);
+      form.dataset.mailto = href;
       form.hidden = true;
       if (ok) { ok.classList.add('show'); ok.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' }); }
+      setTimeout(() => { window.location.href = href; }, 50);
     });
   }
 
@@ -2337,28 +2389,56 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
     if (!reduceMotion) ringTick();
   }
 
-  /* ---------- Router (single-file preview only) ---------- */
+  /* ---------- Router: clean one-word paths (/people, /about, ...) ---------- */
+  const SLUG = { index: '', people: 'people', organizations: 'organizations', why: 'about', support: 'support', contact: 'contact' };
+  const PAGE_FOR = { '': 'index', 'index': 'index', 'index.html': 'index', 'people': 'people', 'organizations': 'organizations', 'about': 'why', 'why': 'why', 'support': 'support', 'donate': 'support', 'contact': 'contact' };
   if (PREVIEW) {
     const pages = [...document.querySelectorAll('.page')];
+    const parse = () => {
+      // legacy form: #/page/anchor  → convert once to /page#anchor
+      const legacy = location.hash.match(/^#\/([a-z-]*)\/?([a-z-]*)$/i);
+      if (legacy && (legacy[1] in PAGE_FOR)) {
+        const pg = PAGE_FOR[legacy[1]];
+        history.replaceState(null, '', '/' + SLUG[pg] + location.search + (legacy[2] ? '#' + legacy[2] : ''));
+      }
+      const seg = location.pathname.replace(/^\/+|\/+$/g, '').split('/')[0].toLowerCase();
+      const id = PAGE_FOR[seg] || 'index';
+      const anchor = location.hash.replace(/^#\/?/, '').split('/')[0];
+      return { id, anchor };
+    };
     const show = () => {
-      const raw = location.hash.replace(/^#\/?/, '');
-      const [id, anchor] = raw.split('/');
-      const target = pages.find((p) => p.dataset.page === (id || 'index')) || pages[0];
+      const { id, anchor } = parse();
+      const target = pages.find((p) => p.dataset.page === id) || pages[0];
+      const changed = !target.classList.contains('active');
       pages.forEach((p) => p.classList.toggle('active', p === target));
       document.title = target.dataset.title || document.title;
       setActiveNav(target.dataset.page);
       closeMenu();
       initIn(target);
-      // re-run reveal for already-visible elements
       target.querySelectorAll('[data-reveal], .stagger, .words').forEach((el) => { if (revealObserver) { revealObserver.unobserve(el); revealObserver.observe(el); } });
       if (anchor) {
         const tabsRoot = target.querySelector('.tabs');
         if (tabsRoot && tabsRoot.activateTab) tabsRoot.activateTab(anchor);
-        const el = target.querySelector('#' + anchor) || target.querySelector('[data-anchor="' + anchor + '"]');
+        const el = target.querySelector('#' + anchor) || target.querySelector('[data-anchor="' + anchor + '"]') || document.getElementById(anchor);
         setTimeout(() => { if (el) el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); }, 60);
-      } else { const de = document.documentElement; de.style.scrollBehavior = 'auto'; window.scrollTo(0, 0); setTimeout(() => { de.style.scrollBehavior = ''; }, 50); }
+      } else if (changed || !history.state || !history.state.keep) { const de = document.documentElement; de.style.scrollBehavior = 'auto'; window.scrollTo(0, 0); setTimeout(() => { de.style.scrollBehavior = ''; }, 50); }
       onScroll();
     };
+    // Intercept same-site links so navigation is instant (no reload of the whole page)
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href]');
+      if (!a || a.target === '_blank' || a.hasAttribute('download') || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const href = a.getAttribute('href');
+      if (!href || !href.startsWith('/') || href.startsWith('//')) return;
+      e.preventDefault();
+      const url = new URL(href, location.origin);
+      if (url.pathname === location.pathname && url.hash === location.hash) { show(); return; }
+      history.pushState(null, '', url.pathname + url.search + url.hash);
+      show();
+    });
+    const footer = document.querySelector('.footer');
+    if (footer) footer.querySelectorAll('form[data-form]').forEach(initForm);
+    window.addEventListener('popstate', show);
     window.addEventListener('hashchange', show);
     show();
   } else {
