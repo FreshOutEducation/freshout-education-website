@@ -1730,8 +1730,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
       </div>
       <div class="custom"><span>$</span><label class="sr-only" for="custom-amt">Custom amount</label><input id="custom-amt" type="number" min="1" placeholder="Other amount" inputmode="numeric"></div>
       <div class="impact" aria-live="polite"></div>
-      <a class="btn btn-primary" href="#/support/give" role="button">Give $50</a>
-      <p class="donate-note small muted mt-2" hidden tabindex="-1">The online processor is not connected yet. To give today, email <a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a>.</p>
+      <a class="btn btn-primary" href="https://givebutter.com/fund-education-and-opportunity-for-every-learner-8oekgx" target="_blank" rel="noopener" role="button">Give $50</a>
       <p class="small muted mt-2 mb-0" style="text-align:center;">Secure giving. Tax-deductible. Cancel monthly gifts anytime.</p>
     </div>
   </div>
@@ -2202,7 +2201,7 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
     start();
   }
 
-  /* ---------- Donate widget (UI only — processor to be connected) ---------- */
+  /* ---------- Donate widget (amount picker; Give button opens Givebutter) ---------- */
   function initDonate(root) {
     if (root.dataset.init) return; root.dataset.init = '1';
     const freq = [...root.querySelectorAll('.toggle button')];
@@ -2220,11 +2219,6 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
     freq.forEach((b) => b.addEventListener('click', () => { freq.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); state.freq = b.dataset.freq; render(); }));
     amounts.forEach((b) => b.addEventListener('click', () => { amounts.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); custom.value = ''; state.amount = parseInt(b.dataset.amount, 10); render(); }));
     custom.addEventListener('input', () => { amounts.forEach((x) => x.setAttribute('aria-pressed', 'false')); state.amount = parseInt(custom.value, 10) || 0; render(); });
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const note = root.querySelector('.donate-note');
-      if (note) { note.hidden = false; note.focus && note.focus(); }
-    });
     render();
   }
 
