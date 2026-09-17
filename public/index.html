@@ -228,7 +228,10 @@ p { margin: 0 0 1em; }
 .menu-btn[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
 .menu-btn[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
 @media (max-width: 960px) {
-  .nav { position: fixed; inset: 0; background: var(--ink); color: var(--paper); flex-direction: column; justify-content: center; gap: 8px; padding: 80px 24px 40px; transform: translateY(-100%); opacity: 0; transition: transform .5s var(--ease), opacity .4s; pointer-events: none; visibility: hidden; }
+  .header .nav { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; height: 100dvh; margin: 0; justify-self: stretch; align-self: stretch; z-index: 940; background: var(--ink); color: var(--paper); flex-direction: column; justify-content: center; gap: 8px; padding: 80px 24px 40px; transform: translateY(-100%); opacity: 0; transition: transform .5s var(--ease), opacity .4s; pointer-events: none; visibility: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; cursor: default; }
+  /* A blur/filter on the header would turn it into the menu's containing block and trap the overlay inside the bar, so drop it while the menu is open. */
+  .header.menu-open, .header.menu-open.scrolled { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; transform: none !important; transition: none; }
+  .header.menu-open .nav-cta { position: relative; z-index: 950; }
   .nav.open { transform: none; opacity: 1; pointer-events: auto; visibility: visible; }
   .nav a { font-family: var(--font-display); font-size: clamp(1.6rem, 6vw, 2.4rem); font-weight: 700; padding: 10px 20px; }
   .nav a.active { background: transparent; color: var(--orange); }
@@ -1962,8 +1965,11 @@ html { scroll-padding-top: 92px; }
       header.classList.add('menu-open');
       document.body.style.overflow = 'hidden';
     });
-    nav.addEventListener('click', (e) => { if (e.target.closest('a')) closeMenu(); });
+    // tap a link, or tap the dark area outside the links, to close
+    nav.addEventListener('click', (e) => { if (e.target.closest('a') || e.target === nav) closeMenu(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+    // leaving mobile widths (rotate / resize) must never leave the page locked
+    window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => { if (e.matches) closeMenu(); });
   }
 
   /* ---------- Active nav link ---------- */
@@ -2416,12 +2422,23 @@ html { scroll-padding-top: 92px; }
       closeMenu();
       initIn(target);
       target.querySelectorAll('[data-reveal], .stagger, .words').forEach((el) => { if (revealObserver) { revealObserver.unobserve(el); revealObserver.observe(el); } });
+      const de = document.documentElement;
+      const jump = (fn) => { de.style.scrollBehavior = 'auto'; fn(); setTimeout(() => { de.style.scrollBehavior = ''; }, 50); };
       if (anchor) {
         const tabsRoot = target.querySelector('.tabs');
         if (tabsRoot && tabsRoot.activateTab) tabsRoot.activateTab(anchor);
         const el = target.querySelector('#' + anchor) || target.querySelector('[data-anchor="' + anchor + '"]') || document.getElementById(anchor);
-        setTimeout(() => { if (el) el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); }, 60);
-      } else if (changed || !history.state || !history.state.keep) { const de = document.documentElement; de.style.scrollBehavior = 'auto'; window.scrollTo(0, 0); setTimeout(() => { de.style.scrollBehavior = ''; }, 50); }
+        if (changed) {
+          // New page: land on the section instantly (no cross-page smooth scroll), then settle once layout is final.
+          jump(() => { window.scrollTo(0, 0); if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' }); });
+          setTimeout(() => { if (el) jump(() => el.scrollIntoView({ behavior: 'auto', block: 'start' })); }, 120);
+        } else if (el) {
+          // Same page: glide when the section is nearby, jump when it is screens away.
+          const dist = Math.abs(el.getBoundingClientRect().top);
+          const smooth = !reduceMotion && dist < window.innerHeight * 1.5;
+          setTimeout(() => { if (smooth) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); else jump(() => el.scrollIntoView({ behavior: 'auto', block: 'start' })); }, 30);
+        }
+      } else if (changed || !history.state || !history.state.keep) { jump(() => window.scrollTo(0, 0)); }
       onScroll();
     };
     // Intercept same-site links so navigation is instant (no reload of the whole page)
