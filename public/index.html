@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200..800&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script async src="https://widgets.givebutter.com/latest.umd.cjs?acct=aUUne3dIDi13clOY&p=other"></script>
   <style>
 /* =========================================================
    FreshOut Education — site styles
@@ -883,6 +884,10 @@ h2.serif-title, .breath h2.big.serif-title { font-size: clamp(2.35rem, 5.2vw, 4.
 .page.active { display: block; }
 
 
+.donate-embed { width: 100%; max-width: 560px; }
+.donate-embed givebutter-giving-form { display: block; width: 100%; min-height: 420px; }
+@media (max-width: 900px) { .donate-embed { max-width: 100%; } }
+
 /* ---------- Mobile fit & touch fixes (2026-09-17) ---------- */
 /* Fill-in blank sizes to the current word (not the longest) so the period stays attached */
 .fillin { overflow-x: clip; }
@@ -1694,7 +1699,7 @@ html { scroll-padding-top: 92px; }
     <div class="team stagger mt-2">
       <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/team-anthony-garcia.jpg" alt="Anthony Garcia" loading="lazy"></div><div><b>Anthony Garcia</b><span>Executive Director</span></div></div>
       <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/team-stephanie-droz.jpg" alt="Stephanie Droz" loading="lazy"></div><div><b>Stephanie Droz</b><span>Counselor</span></div></div>
-      <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/team-jessika-reppucci.jpg" alt="Jessika Reppucci" loading="lazy"></div><div><b>Jessika Reppucci</b><span>Finance Manager</span></div></div>
+      <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/team-megan-jackson.jpg" alt="Megan Jackson" loading="lazy"></div><div><b>Megan Jackson</b><span>Program Trainer</span></div></div>
       <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/team-jessica-carter.jpg" alt="Jessica Carter" loading="lazy"></div><div><b>Jessica Carter</b><span>Employment Coach</span></div></div>
       <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/team-nick-fisher.jpg" alt="Nick Fisher" loading="lazy"></div><div><b>Nick Fisher</b><span>Development Coach</span></div></div>
     </div>
@@ -1702,7 +1707,7 @@ html { scroll-padding-top: 92px; }
     <h3 class="mt-4" data-reveal style="font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.1rem, 3.6vw, 3rem); letter-spacing: -0.01em;">Our board</h3>
     <div class="team stagger mt-2">
       <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/board-heather-lee.jpg" alt="Heather Lee" loading="lazy"></div><div><b>Heather Lee</b><span>President</span></div></div>
-      <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/board-megan-jackson.jpg" alt="Megan Jackson" loading="lazy"></div><div><b>Megan Jackson</b><span>Vice President</span></div></div>
+      <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/board-jessika-reppucci.jpg" alt="Jessika Reppucci" loading="lazy"></div><div><b>Jessika Reppucci</b><span>Vice President</span></div></div>
       <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/board-robert-bringas.jpg" alt="Robert Bringas" loading="lazy"></div><div><b>Robert Bringas</b><span>Treasurer</span></div></div>
       <div class="person"><div class="avatar"><img src="FOE%20Site%20Images/web/board-elizabeth-martinez.jpg" alt="Elizabeth Martinez" loading="lazy"></div><div><b>Elizabeth Martinez</b><span>Board Member</span></div></div>
     </div>
@@ -1747,22 +1752,9 @@ html { scroll-padding-top: 92px; }
         <p data-reveal>Prefer to give by check, stock, donor-advised fund, or a corporate match? Email <a href="mailto:info@freshouteducation.org">info@freshouteducation.org</a> and a person will walk you through it.</p>
       </div>
     </div>
-    <div class="donate" data-reveal="right" aria-label="Donation form (preview)">
-      <div class="toggle" role="group" aria-label="Frequency">
-        <button type="button" data-freq="once" aria-pressed="true">One time</button>
-        <button type="button" data-freq="monthly" aria-pressed="false">Monthly</button>
-      </div>
-      <div class="amounts" role="group" aria-label="Amount">
-        <button type="button" data-amount="25" aria-pressed="false">$25</button>
-        <button type="button" data-amount="50" aria-pressed="true">$50</button>
-        <button type="button" data-amount="100" aria-pressed="false">$100</button>
-        <button type="button" data-amount="250" aria-pressed="false">$250</button>
-        <button type="button" data-amount="500" aria-pressed="false">$500</button>
-        <button type="button" data-amount="1000" aria-pressed="false">$1,000</button>
-      </div>
-      <div class="custom"><span>$</span><label class="sr-only" for="custom-amt">Custom amount</label><input id="custom-amt" type="number" min="1" placeholder="Other amount" inputmode="numeric"></div>
-      <div class="impact" aria-live="polite"></div>
-      <a class="btn btn-primary" href="https://givebutter.com/fund-education-and-opportunity-for-every-learner-8oekgx" target="_blank" rel="noopener" role="button">Give $50</a>
+    <div class="donate-embed" data-reveal="right" aria-label="Donation form">
+      <givebutter-giving-form campaign="8OEKGX" show-goal-bar="true"></givebutter-giving-form>
+      <p class="small muted mt-2" style="text-align:center;">If the form does not load, <a href="https://givebutter.com/fund-education-and-opportunity-for-every-learner-8oekgx" target="_blank" rel="noopener">give on our Givebutter page</a>.</p>
       <p class="small muted mt-2 mb-0" style="text-align:center;">Secure giving. Tax-deductible. Cancel monthly gifts anytime.</p>
     </div>
   </div>
@@ -2244,6 +2236,7 @@ html { scroll-padding-top: 92px; }
     const custom = root.querySelector('.custom input');
     const impact = root.querySelector('.impact');
     const btn = root.querySelector('.btn');
+    if (!custom || !impact || !btn) return;
     let state = { freq: 'once', amount: 50 };
     const render = () => {
       const a = state.amount;
