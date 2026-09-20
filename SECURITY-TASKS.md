@@ -17,7 +17,7 @@ Files: `firebase.json`
 Add to `hosting.headers` a block with `source: "**"` setting `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`, and `Content-Security-Policy-Report-Only` with:
 
 ```
-default-src 'self'; script-src 'self' 'unsafe-inline' https://widgets.givebutter.com https://*.givebutter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://givebutter.com https://*.givebutter.com; connect-src 'self' https://*.givebutter.com; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; object-src 'none'
+default-src 'self'; script-src 'self' 'unsafe-inline' https://widgets.givebutter.com https://*.givebutter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' data: https://videos.pexels.com; frame-src https://givebutter.com https://*.givebutter.com; connect-src 'self' https://givebutter.com https://*.givebutter.com; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; object-src 'none'
 ```
 
 Before finalising, grep `public/index.html` for every external `src=`/`href=`/`action=` and every `fetch(`/`XMLHttpRequest` and make sure each host is covered. Keep the existing `Cache-Control` blocks.
