@@ -1,6 +1,6 @@
 # SECURITY-TASKS.md — freshout-education-website
 
-Source: `Claude -cowork/Security Audit 2026-09-19/01 — Fresh Out Education Website — Security Brief.md` (findings W-1…W-7). Work these in order. One task per commit, on a branch (never on `main`). Stop and report when a task's acceptance check fails; do not weaken the check to pass it.
+Source: `Claude -cowork/Security Program/1 Website/Brief — Website.md` (findings W-1…W-7). Work these in order. One task per commit, on a branch (never on `main`). Stop and report when a task's acceptance check fails; do not weaken the check to pass it.
 
 ## Guardrails for this session
 
@@ -17,7 +17,7 @@ Files: `firebase.json`
 Add to `hosting.headers` a block with `source: "**"` setting `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`, and `Content-Security-Policy-Report-Only` with:
 
 ```
-default-src 'self'; script-src 'self' 'unsafe-inline' https://widgets.givebutter.com https://*.givebutter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://givebutter.com https://*.givebutter.com; connect-src 'self' https://*.givebutter.com; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; object-src 'none'
+default-src 'self'; script-src 'self' 'unsafe-inline' https://widgets.givebutter.com https://*.givebutter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' data: https://videos.pexels.com; frame-src https://givebutter.com https://*.givebutter.com; connect-src 'self' https://givebutter.com https://*.givebutter.com; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; object-src 'none'
 ```
 
 Before finalising, grep `public/index.html` for every external `src=`/`href=`/`action=` and every `fetch(`/`XMLHttpRequest` and make sure each host is covered. Keep the existing `Cache-Control` blocks.
@@ -55,6 +55,8 @@ Files: `public/FOE Site Images/web/*.jpg`
 Run `exiftool -gps:all -json` over the folder. If any file has GPS tags, strip with `exiftool -all= -tagsfromfile @ -Orientation -ColorSpace <file>` and re-verify. Do not recompress or resize.
 
 Acceptance: `exiftool -gps:all` prints nothing for every file; image byte sizes changed only for files that had tags.
+
+Status: verified 2026-09-22 (exiftool not installed; JPEG segments parsed with python3). 32 files in `public/FOE Site Images/web/`, none carries an Exif APP1 segment, so no GPS IFD exists. No file was modified.
 
 ## Not in scope for Claude Code
 
