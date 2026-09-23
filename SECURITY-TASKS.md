@@ -1,6 +1,6 @@
 # SECURITY-TASKS.md — freshout-education-website
 
-Source: `Claude -cowork/Security Audit 2026-09-19/01 — Fresh Out Education Website — Security Brief.md` (findings W-1…W-7). Work these in order. One task per commit, on a branch (never on `main`). Stop and report when a task's acceptance check fails; do not weaken the check to pass it.
+Source: `Claude -cowork/Security Program/1 Website/Brief — Website.md` (findings W-1…W-7). Work these in order. One task per commit, on a branch (never on `main`). Stop and report when a task's acceptance check fails; do not weaken the check to pass it.
 
 ## Guardrails for this session
 
