@@ -56,6 +56,8 @@ Run `exiftool -gps:all -json` over the folder. If any file has GPS tags, strip w
 
 Acceptance: `exiftool -gps:all` prints nothing for every file; image byte sizes changed only for files that had tags.
 
+Status: verified 2026-09-22 (exiftool not installed; JPEG segments parsed with python3). 32 files in `public/FOE Site Images/web/`, none carries an Exif APP1 segment, so no GPS IFD exists. No file was modified.
+
 ## Not in scope for Claude Code
 
 W-5 (retention rule for referral emails) is a policy line for the canon vault. W-6 (zip backup, debug log in the parent folder) is Julyanna's. Console items — Firebase/Google MFA, GitHub org 2FA, Givebutter MFA, registrar MFA — are Julyanna's; record dates in the register table in the brief when done.
