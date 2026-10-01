@@ -1,14 +1,14 @@
 // prerender.mjs — builds public-static/ from public/index.html (the editor export).
 // Plain Node (>=18); no headless browser, no npm install. Run: node prerender.mjs
 // Edit only the three blocks below (PAGES, ORG, VERIFICATION). Everything else is mechanical.
-import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, copyFileSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, copyFileSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const SITE = 'https://freshouteducation.org';
 
 // Titles come from the export's own data-title attributes (D4: keep current). Descriptions are metadata only.
 const PAGES = {
-  index:         { slug: '',              type: 'WebPage',     description: 'A Los Angeles nonprofit teaching money, technology, AI, and career skills to anyone starting over, and training the nonprofits that serve them.' },
+  index:         { slug: '',              type: 'WebPage',     description: 'A Los Angeles nonprofit teaching money, technology, AI, and career skills to anyone starting over.' },  // = the og-image sentence (Link Preview Kit rule)
   people:        { slug: 'people',        type: 'WebPage',     description: 'Four programs that teach what nobody taught you: how money works, how your phone works, how AI can work for you, and how to get hired. In person or virtually, in Los Angeles, in plain English.' },
   organizations: { slug: 'organizations', type: 'WebPage',     description: 'Bring FreshOut to your building. We bring the money, tech, and AI teaching, for your clients and for your staff. Host a program, train your team, or refer someone.' },
   why:           { slug: 'about',         type: 'AboutPage',   description: 'We started in reentry. We stayed for everyone starting over. Why FreshOut Education is called what it is, how it began in 2019, and the people behind it.' },
@@ -29,7 +29,7 @@ const ORG = {
   taxID: '87-4636609',
   address: { '@type': 'PostalAddress', addressLocality: 'Los Angeles', addressRegion: 'CA', addressCountry: 'US' },
   areaServed: { '@type': 'City', name: 'Los Angeles' },
-  description: PAGES.index.description,
+  description: 'A Los Angeles nonprofit teaching money, technology, AI, and career skills to anyone starting over, and training the nonprofits that serve them.',
 };
 
 // Search Console / Bing Webmaster meta-tag values (public by design). Empty string = tag omitted.
@@ -88,8 +88,14 @@ function buildPage(id) {
   // head
   doc = doc.replace(/<title>[^<]*<\/title>/, '<title>' + esc(b.title) + '</title>');
   doc = doc.replace(/<meta name="description" content="[^"]*">/, '<meta name="description" content="' + esc(p.description) + '">');
-  doc = doc.replace(/<meta property="og:title" content="[^"]*">/, '<meta property="og:title" content="' + esc(b.title) + '">');
-  doc = doc.replace(/<meta property="og:description" content="[^"]*">/, '<meta property="og:description" content="' + esc(p.description) + '"><meta property="og:url" content="' + url + '"><link rel="canonical" href="' + url + '">');
+  // Link Preview Kit: the home page keeps og:title = company name only (export values). Sub-pages get their own title/description so a shared /people link says what it is.
+  const ogTitle = id === 'index' ? 'FreshOut Education' : b.title;
+  doc = doc.replace(/<meta property="og:title" content="[^"]*">/, '<meta property="og:title" content="' + esc(ogTitle) + '">');
+  doc = doc.replace(/<meta name="twitter:title" content="[^"]*">/, '<meta name="twitter:title" content="' + esc(ogTitle) + '">');
+  doc = doc.replace(/<meta property="og:description" content="[^"]*">/, '<meta property="og:description" content="' + esc(p.description) + '">');
+  doc = doc.replace(/<meta name="twitter:description" content="[^"]*">/, '<meta name="twitter:description" content="' + esc(p.description) + '">');
+  doc = doc.replace(/<meta property="og:url" content="[^"]*">/, '<meta property="og:url" content="' + url + '"><link rel="canonical" href="' + url + '">');
+  if (!doc.includes('rel="canonical"')) die('canonical not inserted for ' + id);
   const ver = (VERIFICATION.google ? '<meta name="google-site-verification" content="' + VERIFICATION.google + '">' : '') + (VERIFICATION.bing ? '<meta name="msvalidate.01" content="' + VERIFICATION.bing + '">' : '');
   doc = doc.replace('<meta charset="utf-8">', '<meta charset="utf-8">' + ver);
   const jsonld = ld(ORG) + ld({ '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: 'FreshOut Education', publisher: { '@id': ORG['@id'] } })
@@ -117,8 +123,12 @@ const urls = Object.keys(PAGES).map(buildPage);
 // 5. Images referenced relatively by the export, sitemap, robots.
 const copyDir = (src, dst) => { mkdirSync(dst, { recursive: true }); for (const e of readdirSync(src, { withFileTypes: true })) { if (e.name.startsWith('.')) continue; e.isDirectory() ? copyDir(join(src, e.name), join(dst, e.name)) : copyFileSync(join(src, e.name), join(dst, e.name)); } };
 copyDir('public/FOE Site Images', join(OUT, 'FOE Site Images'));
+for (const f of ['favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png', 'apple-touch-icon.png', 'og-image.png']) {
+  if (!existsSync(join('public', f))) die('missing kit file public/' + f);
+  copyFileSync(join('public', f), join(OUT, f));
+}
 const today = new Date().toISOString().slice(0, 10);
 writeFileSync(join(OUT, 'sitemap.xml'), '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls.map((u) => '  <url><loc>' + u + '</loc><lastmod>' + today + '</lastmod></url>').join('\n') + '\n</urlset>\n');
 writeFileSync(join(OUT, 'robots.txt'), 'User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n');
-console.log('wrote sitemap.xml (' + urls.length + ' urls), robots.txt; copied FOE Site Images');
+console.log('wrote sitemap.xml (' + urls.length + ' urls), robots.txt; copied FOE Site Images + favicon/og kit');
 console.log('done');
