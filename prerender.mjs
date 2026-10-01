@@ -123,7 +123,7 @@ const urls = Object.keys(PAGES).map(buildPage);
 // 5. Images referenced relatively by the export, sitemap, robots.
 const copyDir = (src, dst) => { mkdirSync(dst, { recursive: true }); for (const e of readdirSync(src, { withFileTypes: true })) { if (e.name.startsWith('.')) continue; e.isDirectory() ? copyDir(join(src, e.name), join(dst, e.name)) : copyFileSync(join(src, e.name), join(dst, e.name)); } };
 copyDir('public/FOE Site Images', join(OUT, 'FOE Site Images'));
-for (const f of ['favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png', 'apple-touch-icon.png', 'og-image.png']) {
+for (const f of ['favicon.svg', 'favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png', 'apple-touch-icon.png', 'og-image.png']) {
   if (!existsSync(join('public', f))) die('missing kit file public/' + f);
   copyFileSync(join('public', f), join(OUT, f));
 }
