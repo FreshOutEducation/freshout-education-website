@@ -1,0 +1,25 @@
+Captured 2026-09-30 via the Claude desktop browser pane, fetch() from origin https://freshouteducation.org
+(the session's shells cannot reach the domain: curl status=000 from both the Mac VM and the cloud container).
+
+Live response, SHA-256 9d6a85125c996a7e6defd6bd57fad874d2fd3039d93141b48385e376cb556058, 5,653,080 bytes,
+identical to public/index.html on disk (same hash) — so before-home-raw.html is a byte-exact copy of the live fetch.
+
+path              status bytes     content-type              title                                                            h1 desc canonical ld+json loading-placeholder
+/                 200    5653080   text/html; charset=utf-8  FreshOut Education | Fresh out of anything. Ready for what's next.  6  1    0         0       none
+/about            200    5653080   text/html (same document as /)                                                            6  1    0         0       none
+/people           200    5653080   text/html (same document as /)                                                            6  1    0         0       none
+/sitemap.xml      200    5653080   text/html (same document as /)  — no sitemap exists; SPA rewrite serves index.html
+/robots.txt       200    5653080   text/html (same document as /)  — no robots.txt exists; SPA rewrite serves index.html
+/nonexistent-zz   200    5653080   text/html (same document as /)  — no 404; every path returns the home document
+
+H1s in the raw HTML (6, all on one document):
+  1. Fresh out of anything. [rotating word list] …
+  2. You don't need experience. You need a seat.
+  3. Bring FreshOut to your building.
+  4. We started in reentry. We stayed for everyone starting over.
+  5. Fund the room where a fresh start becomes a real one.
+  6. Say hello. A person will reply.
+
+Response headers of note: cache-control: max-age=3600 (Firebase CDN; firebase.json asks for max-age=0 on *.html but the
+edge reported max-age=3600 on / with x-cache: HIT); last-modified Wed, 23 Sep 2026 04:45:54 GMT; etag feba3fb6…-br.
+Open Graph tags present: og:title, og:description, og:image, og:type. No rel=canonical, no JSON-LD.

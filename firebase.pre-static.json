@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public-static",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -55,6 +55,12 @@
             "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://widgets.givebutter.com https://*.givebutter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' data: https://videos.pexels.com; frame-src https://givebutter.com https://*.givebutter.com; connect-src 'self' https://givebutter.com https://*.givebutter.com; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; object-src 'none'"
           }
         ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
       }
     ]
   }
