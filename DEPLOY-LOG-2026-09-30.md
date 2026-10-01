@@ -164,3 +164,5 @@ Open for Julyanna:
 1. Re-enable "Require approvals" on the `main` branch-protection rule (temporarily relaxed to merge PR #2).
 2. Commit this log + EXEC-TICKETS (left on the local branch `docs/seo-deploy-log-2026-09-30`, see below).
 3. Week-2 (2026-10-14) and week-6 (2026-11-11) check-ins are scheduled tasks; Appendix A tables apply.
+
+- 2026-09-30 (evening): Julyanna re-enabled "Require approvals" on the `main` branch rule and saved. Branch protection is back to the security-batch configuration. Open item 1 closed.
