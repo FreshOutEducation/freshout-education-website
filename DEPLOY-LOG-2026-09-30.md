@@ -166,3 +166,14 @@ Open for Julyanna:
 3. Week-2 (2026-10-14) and week-6 (2026-11-11) check-ins are scheduled tasks; Appendix A tables apply.
 
 - 2026-09-30 (evening): Julyanna re-enabled "Require approvals" on the `main` branch rule and saved. Branch protection is back to the security-batch configuration. Open item 1 closed.
+
+## Link Preview & Favicon Kit (2026-09-30, evening) — per "Link-Preview-Kit-Handoff.md"
+
+Inputs (confirmed by Julyanna in chat): tagline "A Los Angeles nonprofit teaching money, technology, AI, and career skills to anyone starting over." (16 words); accent = burnt orange `#E37B42` (the site's bright orange for dark grounds); background = ink `#141414`; text = cream `#F9F4E9`; mark = the header SVG from the export; type = Inter Tight (ExtraBold wordmark, Bold tagline 54px / 1.25).
+Generated in the session's container (cairosvg + Pillow + ImageMagick; fonts from @fontsource/inter-tight), script kept at the session scratchpad `kit/make_kit.py`:
+- favicon.ico (16/32/48 multi-size, verified with `identify`), favicon-16x16.png, favicon-32x32.png, apple-touch-icon.png 180×180 (RGB, no alpha) — mark in the old favicon's orange `#C4541F` on ink, per Julyanna (keeps today's tab icon look); the card uses the cream mark like the dark hero, og-image.png 1200×630 RGB 55 KB — logo top-left (72,44), tagline left-aligned x=72 in 4 lines, 148×6 orange rule 28px below, decorative mark at 7% opacity on the right third (left edge x=872, clear of the 780px text column), all inside the 60px safe zone. Readability checked at 350px wide; 16px icon checked at actual size (figure + chevron still read).
+Files placed in `public/` (site root) and copied by `prerender.mjs` into `public-static/`.
+Head (export `public/index.html`, replaced the data-URI SVG icon + Unsplash og:image block — ticket T4 closed): the kit snippet verbatim with og:title "FreshOut Education", og:description = tagline, og:url, og:image absolute + width/height/alt, twitter:card/title/description/image. Home meta description = the tagline (kit rule: card text = description).
+Deviation, stated: on the five sub-pages the build keeps per-page og:title / twitter:title (the page title) and per-page description, with the shared og:image — a shared `/people` link should say "For people: programs", not just the company name. Home follows the kit exactly.
+Build checks after rebuild: all six pages title=1 desc=1 canonical=1 ld=3 h1=1 tags=1/1; sitemap 6. Export body unchanged (diff = head tags only). Branch `link-preview-kit`.
+Note: Firebase caches `*.png` for a year (immutable); if og-image.png is ever redesigned, rename it (e.g. og-image-2.png) and update the tags.
